@@ -1,19 +1,18 @@
 # 📊 Global Supply Chain Risk & Resilience Dashboard — Power BI
 
-An interactive **Power BI** project designed to help executives, procurement, logistics, finance, and risk teams monitor supply chain risks, delays, and cost impacts while enabling scenario planning for resilience.
+An interactive **Power BI** project designed to help executives, procurement, logistics, finance, and risk teams monitor supply chain risks, delays, and cost impacts — all on a single consolidated dashboard.
 
 ---
 
 ## 🚨 Problem Statement
 
-Global supply chains are complex and exposed to multiple risks (supplier delays, route disruptions, geopolitical events, weather). Companies often struggle to:
+Global supply chains face multiple risks including supplier delays, route disruptions, geopolitical events, and weather. Companies often struggle to:
 
 - Identify high-risk suppliers and routes quickly  
 - Quantify potential impact on lead time and costs  
 - Make informed decisions to mitigate delays and losses  
-- Track operational KPIs and exposure in real-time  
 
-**This project consolidates supply chain, shipment, and risk data into a single dashboard to enable actionable insights and risk mitigation.**
+**This dashboard consolidates all supply chain, shipment, and risk data into a single page for actionable insights.**
 
 ---
 
@@ -22,23 +21,22 @@ Global supply chains are complex and exposed to multiple risks (supplier delays,
 The dashboard provides:
 
 - **Supply Chain KPIs:** On-Time Delivery %, Average Lead Time, Delay Rate %, Supplier Reliability %, Risk Score, Risk-Adjusted Lead Time & Cost, Exposure $  
-- **Visualization:** Executive overview, supplier ranking, route/port maps, and what-if scenario analysis  
+- **Visualization:** All KPIs, supplier performance, route analysis, risk events, and scenario simulations on one page  
 - **Interactive Filters:** Region, Supplier, Route, Product, Risk Level, Transport Mode, Time  
-- **Scenario Analysis:** Simulate supplier failures to assess risk impact  
-- **Decision Support:** Helps executives, procurement, logistics, and finance prioritize risk mitigation  
+- **Scenario Analysis:** Simulate supplier failure or route disruption and view impact immediately  
 
 ---
 
 ## 🚀 Project Workflow
 
 ### 🟦 1. Project Planning & Requirements
-- Define one-line goal: **"Identify supply chain risks, assess impact, and prioritize mitigation."**  
-- Target users: Executives, Procurement, Logistics/Operations, Risk/Compliance, Finance  
+- Goal: **"Identify supply chain risks, assess impact, and prioritize mitigation."**  
+- Users: Executives, Procurement, Logistics/Operations, Risk/Compliance, Finance  
 - Key questions: Supplier reliability, route delays, on-time delivery %, risk-adjusted costs, exposure, hotspot regions, scenario outcomes  
 
 ---
 
-### 🟩 2. Data Collection & Preparation
+### 🟩 2. Data Preparation
 Required datasets:
 
 - `Suppliers.csv` → SupplierID, name, country, historical on-time %, contracts  
@@ -47,7 +45,6 @@ Required datasets:
 - `Routes.csv` → RouteID, origin/destination, transport mode  
 - `RiskEvents.csv` → date, country/port, event type, severity  
 - `Calendar.csv` → dates, weeks, months, quarters, years  
-- Optional: Backup suppliers/routes, FX rates, CO₂ per route  
 
 Tasks:
 
@@ -72,7 +69,7 @@ Tasks:
 - Create derived columns:
   - Risk-Adjusted Lead Time = `LeadTime * (1 + RiskFactor)`  
   - Risk-Adjusted Cost = `Cost * (1 + RiskFactor)`  
-- Categorize risk levels (e.g., Low, Medium, High)  
+- Categorize risk levels (Low, Medium, High)  
 
 ---
 
@@ -81,7 +78,7 @@ Tasks:
 - **Average Lead Time (days)** → `AVERAGE(fact_shipments[LeadTime])`  
 - **Delay Rate %** → `DIVIDE(COUNTROWS(FILTER(fact_shipments, DeliveredOnTime=FALSE)), COUNTROWS(fact_shipments), 0)`  
 - **Supplier Reliability %** → `DIVIDE(COUNTROWS(FILTER(fact_shipments, DeliveredOnTime=TRUE && SupplierID=SelectedSupplier)), COUNTROWS(FILTER(fact_shipments, SupplierID=SelectedSupplier)), 0)`  
-- **Risk Score (0–100)** → weighted composite from country, weather, strike, historical delays  
+- **Risk Score (0–100)** → composite weighted from country, weather, strike, historical delays  
 - **Risk-Adjusted Lead Time** → `LeadTime * (1 + RiskFactor)`  
 - **Risk-Adjusted Cost** → `Cost * (1 + RiskFactor)`  
 - **Exposure ($)** → sum of `Cost` for high-risk suppliers/routes  
@@ -89,53 +86,37 @@ Tasks:
 
 ---
 
-### 🟧 6. Report Pages & Visuals
+### 🟧 6. Dashboard Page
 
-**1️⃣ Executive Overview**
+**Global Supply Chain Risk Dashboard (Single Page)**
 
-- KPI Cards: On-Time Delivery %, Average Lead Time, Risk Score, Exposure $  
-- Trend Line: Delivery performance over time  
-- Map: Risk hotspots by country/region  
-- Top 5 Suppliers/Risk Ranking  
-
-**2️⃣ Supplier Analysis**
-
-- Table: Supplier reliability, risk score, exposure $  
-- Bar/Column: Top risk contributors  
-- Filters: Supplier, Product, Risk Level  
-
-**3️⃣ Route & Map Analysis**
-
-- Map: Routes and ports by delay frequency  
-- KPIs: Route-level performance and exposure  
-- Filters: Origin, Destination, Transport Mode  
-
-**4️⃣ What-If / Scenario Analysis**
-
-- Simulate supplier failure or route disruption  
-- Adjust risk factor and observe impact on Exposure $ and Risk-Adjusted Lead Time  
-- Interactive slicers to test multiple scenarios  
+- **KPI Cards:** On-Time Delivery %, Average Lead Time, Risk Score, Exposure $  
+- **Supplier Table:** Reliability %, Risk Score, Exposure $  
+- **Route & Map Visualization:** Risk hotspots by region and route delays  
+- **Trend Charts:** Delivery performance and delays over time  
+- **Scenario/What-If Controls:** Simulate supplier failure or route disruption and instantly view impact  
+- **Filters/Slicers:** Region, Supplier, Route, Product, Risk Level, Transport Mode, Time  
 
 ---
 
 ### 🟨 7. Usage
 
 1. Open `.pbix` in **Power BI Desktop**  
-2. Load sample datasets (CSV files included)  
+2. Load included sample datasets  
 3. Refresh data sources  
-4. Apply slicers (Region, Supplier, Route, Product, Risk Level, Time)  
-5. Navigate through 4 report pages for full insights  
-6. Use What-If controls to simulate supplier failures  
+4. Use slicers (Region, Supplier, Route, Product, Risk Level, Time)  
+5. Interact with the single-page dashboard to analyze supply chain risks  
+6. Test scenario controls to simulate disruptions  
 
 ---
 
 ### 🧠 Key Outcomes
 
-- Identify top 5 risky suppliers in under 10 seconds  
-- View risk hotspots on map and drill into shipments  
+- Quickly identify top risky suppliers and routes  
+- Monitor overall supply chain performance in real-time  
 - Compare original vs. risk-adjusted lead time and cost  
-- Run “Supplier Offline” scenario and see impact on exposure  
-- Supports informed decision-making for executives, procurement, logistics, and finance  
+- Assess impact of hypothetical disruptions on exposure $  
+- Supports informed decisions for executives, procurement, logistics, and finance  
 
 ---
 
@@ -152,7 +133,7 @@ Tasks:
 
 - Data modeling with star schema  
 - DAX measures for supply chain KPIs  
+- Interactive, single-page executive dashboards  
 - Scenario & what-if analysis  
-- Interactive dashboards with maps, slicers, and filters  
-- Professional dashboard design for executives and managers  
+- Professional dashboard design with maps, tables, charts, and filters  
 
