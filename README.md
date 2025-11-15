@@ -88,7 +88,7 @@ Tasks:
 
 ### 🟧 6. Dashboard Page
 
-**Global Supply Chain Risk Dashboard (Single Page)**
+[**Global Supply Chain Risk Dashboard**](https://github.com/Hassan0397/Global-Supply-Chain-Risk-Resilience-Dashboard-Power-BI/blob/main/Supply_Chain_Dashboard_Summary%20image.png)
 
 - **KPI Cards:** On-Time Delivery %, Average Lead Time, Risk Score, Exposure $  
 - **Supplier Table:** Reliability %, Risk Score, Exposure $  
